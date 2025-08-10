@@ -1,0 +1,33 @@
+# pod-vuln-dashboard.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: vuln-dashboard
+  namespace: honeypot-host
+  labels:
+    app: vuln-dashboard
+spec:
+  hostAliases:
+  - ip: "10.101.0.58"
+    hostnames:
+    - "kubernetes.default.svc"
+    - "kubernetes"
+  containers:
+    - name: vuln-dashboard
+      image: tripster98/code_injection_dashboard:latest
+      ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vuln-dashboard
+  namespace: honeypot-host
+spec:
+  type: ClusterIP
+  selector:
+    app: vuln-dashboard
+  ports:
+    - port: 80
+      targetPort: 8080
+

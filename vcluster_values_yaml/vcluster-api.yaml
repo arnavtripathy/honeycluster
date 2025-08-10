@@ -1,0 +1,9 @@
+controlPlane:
+  distro:
+    k8s:
+      apiServer:
+        extraArgs:
+          - --anonymous-auth=true
+policies:
+  networkPolicy:
+    enabled: true

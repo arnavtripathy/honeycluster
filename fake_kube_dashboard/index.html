@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Kubernetes Dashboard Honeypot</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+    }
+    .navbar {
+      background: #1976d2;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .navbar input {
+      padding: 6px;
+      width: 300px;
+      border: none;
+      border-radius: 4px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    .logo img {
+      height: 30px;
+      margin-right: 10px;
+    }
+    .sidebar {
+      width: 220px;
+      background: #ffffff;
+      height: 100vh;
+      padding: 20px;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+      position: fixed;
+    }
+    .sidebar li {
+      padding: 8px;
+      cursor: pointer;
+    }
+    .sidebar li:hover {
+      background: #e3f2fd;
+      font-weight: bold;
+    }
+    .content {
+      margin-left: 240px;
+      padding: 20px;
+    }
+    .card {
+      background: white;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      transition: box-shadow 0.2s ease-in-out;
+    }
+    .card:hover {
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    .graph {
+      height: 100px;
+      position: relative;
+      cursor: pointer;
+    }
+    .graph svg {
+      width: 100%;
+      height: 100%;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      text-align: left;
+      padding: 8px;
+    }
+    th {
+      background: #eeeeee;
+    }
+    tr:nth-child(even) {
+      background: #f9f9f9;
+    }
+    tbody tr {
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    tbody tr:hover {
+      background: #e0f7fa;
+    }
+    .usage-bar {
+      height: 10px;
+      background: #64b5f6;
+      border-radius: 2px;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/kubernetes/kubernetes/master/logo/logo.png" alt="Kubernetes Logo">
+      <strong>kubernetes</strong>
+    </div>
+    <input type="text" placeholder="Search" />
+    <div>
+      <button style="background: transparent; border: none; color: white; font-size: 18px; cursor: pointer;">+ CREATE</button>
+      <span style="margin-left: 10px;">&#9679;</span>
+    </div>
+  </div>
+
+  <div class="sidebar">
+    <p><strong>Workloads</strong></p>
+    <ul style="list-style: none; padding-left: 0;">
+      <li onclick="alert('Pods clicked')">Pods</li>
+      <li onclick="alert('Deployments clicked')">Deployments</li>
+      <li onclick="alert('Replica Sets clicked')">Replica Sets</li>
+      <li onclick="alert('Jobs clicked')">Jobs</li>
+    </ul>
+  </div>
+
+  <div class="content">
+    <div class="card" onclick="alert('CPU graph clicked')">
+      <h3>CPU usage</h3>
+      <div class="graph">
+        <svg id="cpuGraph">
+          <polyline id="cpuLine" fill="#a5d6a7" stroke="#388e3c" stroke-width="2"></polyline>
+        </svg>
+      </div>
+    </div>
+    <div class="card" onclick="alert('Memory graph clicked')">
+      <h3>Memory usage</h3>
+      <div class="graph">
+        <svg id="memGraph">
+          <polyline id="memLine" fill="#90caf9" stroke="#1565c0" stroke-width="2"></polyline>
+        </svg>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Pods</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Node</th>
+            <th>Status</th>
+            <th>Restarts</th>
+            <th>Age</th>
+            <th>CPU (cores)</th>
+            <th>Memory (bytes)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr onclick="alert('Clicked pod: kubernetes-dashboard-7b9c7b')">
+            <td>kubernetes-dashboard-7b9c7b</td>
+            <td>minikube</td>
+            <td>Running</td>
+            <td>0</td>
+            <td>27 minutes</td>
+            <td><div class="usage-bar" style="width: 10%;"></div></td>
+            <td><div class="usage-bar" style="width: 20%; background: #2196f3;"></div></td>
+          </tr>
+          <tr onclick="alert('Clicked pod: heapster-qhq6r')">
+            <td>heapster-qhq6r</td>
+            <td>minikube</td>
+            <td>Running</td>
+            <td>0</td>
+            <td>27 minutes</td>
+            <td><div class="usage-bar" style="width: 5%;"></div></td>
+            <td><div class="usage-bar" style="width: 15%; background: #2196f3;"></div></td>
+          </tr>
+          <tr onclick="alert('Clicked pod: etcd-minikube')">
+            <td>etcd-minikube</td>
+            <td>minikube</td>
+            <td>Running</td>
+            <td>0</td>
+            <td>20 hours</td>
+            <td><div class="usage-bar" style="width: 20%;"></div></td>
+            <td><div class="usage-bar" style="width: 30%; background: #2196f3;"></div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    function generatePoints(count, maxY) {
+      let points = [];
+      for (let i = 0; i < count; i++) {
+        let x = i * 20;
+        let y = Math.floor(Math.random() * maxY);
+        points.push(`${x},${100 - y}`);
+      }
+      return points.join(" ");
+    }
+
+    document.getElementById('cpuLine').setAttribute('points', generatePoints(12, 60));
+    document.getElementById('memLine').setAttribute('points', generatePoints(12, 40));
+  </script>
+</body>
+</html>

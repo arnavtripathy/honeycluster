@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: privileged-bash
+spec:
+  containers:
+  - name: privileged
+    image: ubuntu
+    command: ["/bin/bash", "-c", "--"]
+    args: ["while true; do sleep 30; done;"]
+    securityContext:
+      privileged: true

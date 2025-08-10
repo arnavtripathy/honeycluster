@@ -1,0 +1,28 @@
+falcosidekick:
+  enabled: true
+  webui:
+    enabled: true
+    config:
+      rate_limit: 0
+
+falco:
+  jsonOutput: true
+  jsonIncludeOutputProperty: true
+  logLevel: info
+  http_output:
+    enabled: true
+    url: "http://falco-falcosidekick.default.svc.cluster.local:2801/"
+
+driver:
+  kind: modern_ebpf
+
+tty: true
+#Add rules you want.
+customRules:
+  cat_detector.yaml: |-
+    - rule: Detect cat passwd anywhere
+      desc: Fires when any process calls 'cat /etc/passwd'
+      condition: evt.type = execve and proc.name = cat and proc.args contains "/etc/passwd"
+      output: "Detected 'cat /etc/passwd' cmdline=%proc.cmdline user=%user.name"
+      priority: WARNING
+      tags: [test, cat, passwd]

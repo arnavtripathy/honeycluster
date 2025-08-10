@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-kube-api-proxy
+  namespace: honeypot-host
+  labels:
+    app: nginx-kube-api-proxy
+spec:
+  containers:
+  - name: nginx-kube-api-proxy
+    image: tripster98/nginx-kube-api-proxy
+    ports:
+    - containerPort: 8443
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-kube-api-proxy
+  namespace: honeypot-host
+spec:
+  selector:
+    app: nginx-kube-api-proxy
+  ports:
+  - protocol: TCP
+    port: 8443
+    targetPort: 8443
+  type: ClusterIP
