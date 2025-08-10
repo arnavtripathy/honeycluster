@@ -48,3 +48,25 @@ The system is designed to **attract**, **detect**, and **log** malicious activit
 
 Below is the high-level architecture of **Honeycluster**:
 
+![Honeycluster Architecture](honeyarch.png)
+
+
+## 📦 Deployment Guide
+
+### 1️⃣ Prerequisites
+- Kubernetes cluster (Minikube or cloud-based)
+- [Helm](https://helm.sh/) installed
+- `kubectl` configured
+
+### 2️⃣ Deploy vcluster with Insecure API
+Create a `values.yaml`:
+```yaml
+controlPlane:
+  distro:
+    k8s:
+      apiServer:
+        extraArgs:
+          - --anonymous-auth=true
+```
+
+
