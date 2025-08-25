@@ -59,16 +59,88 @@ Below is the high-level architecture of **Honeycluster**:
 - `kubectl` configured
 
 ### 2️⃣ Deploy vcluster with Insecure API
+
 ` vcluster create honeypot -n honeypot -f vcluster_values_yaml/vcluster-api.yaml `
+
 The values file is deliberately configured with the API server set to [anonymous mode](https://securitylabs.datadoghq.com/cloud-security-atlas/vulnerabilities/unauthenticated-api-server/) misconfig. You can modify values.yaml further to add more misconfigurations.
 
-` kubectl apply -f vcluster_values_yaml/anonymous-policy.yaml` to deploy the policy for anonymous mode. Currently it allows every request to kube api in anonymous. You can configure accordingly
+To deploy the policy for anonymous mode. Currently it allows every request to kube api in anonymous. You can configure accordingly:
 
-### Deploy Vulnerable Workloads
+` kubectl apply -f vcluster_values_yaml/anonymous-policy.yaml`
+
+### 3️⃣ Deploy Vulnerable Workloads
 
 The `vulnerable_workloads` folder contains some sample vulnerable workloads which you can deploy . You can configure accordingly. To deploy them:
 
 ` kubectl apply -f vulnerable_workloads/`
+
+### 4️⃣ Deploy Falco
+
+Deploy falco using the below command. Make sure you're in the context of main cluster and not vCluster:
+
+`helm repo add falcosecurity https://falcosecurity.github.io/charts
+helm repo update
+helm upgrade --install falco falcosecurity/falco -n default -f falco/values.yaml`
+
+Falco, Falcosidekick and it's UI is deployed in default namespace. You can view the dashboard of falcosidekick with below command:
+
+`kubectl --context=minikube  port-forward svc/falco-falcosidekick-ui 2802:2802 -n default`
+
+### 5️⃣ Deploy Nginx Config to expose vcluster KubeAPI
+
+This folder contains configurations to setup nginx logging of vcluster KubeAPI. If namsepace of vcluster is honeypot and falco is deployed in default, no changes is needed and it can be directly deployed:
+
+`kubectl --context=minikube apply -f nginx_config/nginx-kube-api.yaml`
+
+If not, please make changes accordingly , the image used is not nginx, rather a custom image pointing to my registry, you can create a custom image, build and deploy accordingly. You can also regenerate the certificates accordingly.
+
+### 6️⃣ Initial Access web application
+
+In my architecture , I have a web application which points to the nginx in /etc/hosts file to trick the attacker into thinking that the nginx endpoint is the KubeAPI endpoint. To configure this, one small change is needed: In the yaml file, change the below:
+
+`ip: "10.101.0.58" `
+
+Change the IP into the nginx service cluster IP
+
+Of course you can deploy whatever you want as initial access and create your own, this is just my deployment.
+
+## 🛠 Configuration Notes
+
+### vcluster:
+
+vcluster_values_yaml/vcluster-api.yaml intentionally enables anonymous API.
+Tweak with care; it’s supposed to be insecure here.
+
+### Falco:
+
+Default rules already detect common attacker behaviors (exec, priv‑esc, etc.).
+Add custom rules via Helm values or ConfigMap if needed.
+
+### Falcosidekick:
+
+Supports Slack, Teams, Discord, Webhook, InfluxDB, Loki, etc. Configure via values.
+
+### NGINX:
+
+The nginx.conf defines the fake API routes and JSON logging format.
+Extend with more endpoints to look “real”.
+
+### Vulnerable workloads:
+
+vulnerable_workloads/ holds intentionally weak deployments. Adjust as you like.
+
+
+## Screenshots: 
+
+
+## 🤝 Contributing
+
+- Fork the repo
+
+- Create a feature branch
+
+- Submit a PR with clear description and testing steps
+
 
 
 
