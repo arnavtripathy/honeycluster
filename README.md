@@ -59,14 +59,18 @@ Below is the high-level architecture of **Honeycluster**:
 - `kubectl` configured
 
 ### 2️⃣ Deploy vcluster with Insecure API
-Create a `values.yaml`:
-```yaml
-controlPlane:
-  distro:
-    k8s:
-      apiServer:
-        extraArgs:
-          - --anonymous-auth=true
-```
+` vcluster create honeypot -n honeypot -f vcluster_values_yaml/vcluster-api.yaml `
+The values file is deliberately configured with the API server set to [anonymous mode](https://securitylabs.datadoghq.com/cloud-security-atlas/vulnerabilities/unauthenticated-api-server/) misconfig. You can modify values.yaml further to add more misconfigurations.
+
+` kubectl apply -f vcluster_values_yaml/anonymous-policy.yaml` to deploy the policy for anonymous mode. Currently it allows every request to kube api in anonymous. You can configure accordingly
+
+### Deploy Vulnerable Workloads
+
+The `vulnerable_workloads` folder contains some sample vulnerable workloads which you can deploy . You can configure accordingly. To deploy them:
+
+` kubectl apply -f vulnerable_workloads/`
+
+
+
 
 
