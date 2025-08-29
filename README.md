@@ -132,15 +132,24 @@ vulnerable_workloads/ holds intentionally weak deployments. Adjust as you like.
 
 ## Screenshots: 
 
-Below is a screenshot of how an attacker would see the fake kube api endpoint once a pod is compromised. The attacker would be tricked into thinking it is the real kube api endpoint and perform port scanning when it is actually the vcluster api endpoint 
+Below is a screenshot of how an attacker would see the fake kube api endpoint once a pod is compromised. The attacker would be tricked into thinking it is the real kube api endpoint and perform port scanning when it is actually the vcluster api endpoint.
+
+
+
 <img width="448" height="318" alt="Screenshot 2025-08-07 192956" src="https://github.com/user-attachments/assets/a7ac43ae-811d-4da2-912c-dc765d8a48ec" />
 
 
 
 Attacker querying and finding the fake secret injected. Thie can be customized as per user requirements.
+
+
+
 <img width="436" height="497" alt="Screenshot 2025-08-07 193853" src="https://github.com/user-attachments/assets/2fabe42b-02a1-4530-a0fc-2e8fcf90f71c" />
 
 All logs stored and can be queried in falco sidekick dashboard as shown below:
+
+
+
 <img width="1223" height="517" alt="Screenshot 2025-08-07 201134" src="https://github.com/user-attachments/assets/6e6a760a-958e-43bf-ba69-04a63f00f87d" />
 
 
