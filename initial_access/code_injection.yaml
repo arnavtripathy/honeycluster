@@ -8,7 +8,7 @@ metadata:
     app: vuln-dashboard
 spec:
   hostAliases:
-  - ip: "10.101.0.58"
+  - ip: "10.110.254.171"
     hostnames:
     - "kubernetes.default.svc"
     - "kubernetes"
