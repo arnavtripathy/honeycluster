@@ -78,9 +78,11 @@ The `vulnerable_workloads` folder contains some sample vulnerable workloads whic
 
 Deploy falco using the below command. Make sure you're in the context of main cluster and not vCluster:
 
-`helm repo add falcosecurity https://falcosecurity.github.io/charts
-helm repo update
-helm upgrade --install falco falcosecurity/falco -n default -f falco/values.yaml`
+`helm repo add falcosecurity https://falcosecurity.github.io/charts`
+ 
+ `helm repo update`
+ 
+ `helm upgrade --install falco falcosecurity/falco -n default -f falco/values.yaml`
 
 Falco, Falcosidekick and it's UI is deployed in default namespace. You can view the dashboard of falcosidekick with below command:
 
