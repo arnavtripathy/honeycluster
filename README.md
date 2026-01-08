@@ -92,6 +92,8 @@ Falco, Falcosidekick and it's UI is deployed in default namespace. You can view 
 
 This folder contains configurations to setup nginx logging of vcluster KubeAPI. If namsepace of vcluster is honeypot and falco is deployed in default, no changes is needed and it can be directly deployed:
 
+`kubectl --context=minikube create ns honeypot-host`
+
 `kubectl --context=minikube apply -f nginx_config/nginx-kube-api.yaml`
 
 If not, please make changes accordingly , the image used is not nginx, rather a custom image pointing to my registry, you can create a custom image, build and deploy accordingly. You can also regenerate the certificates accordingly.
@@ -105,6 +107,11 @@ In my architecture , I have a web application which points to the nginx in /etc/
 Change the IP into the nginx service cluster IP
 
 Of course you can deploy whatever you want as initial access and create your own, this is just my deployment.
+
+
+`kubectl --context=minikube apply -f initial_access/code_injection.yaml`
+
+Note: A question might be that why don't we just deploy the initial access application and nginx proxy pod in the vcluster itself. The problem was that I was unable to add the fake kube api service dns for pods inside vcluster itself. Hence we need to add it outside vcluster to trick attackers. Take precaution and lock down the namespace which has these pods deployed.
 
 ## 🛠 Configuration Notes
 
