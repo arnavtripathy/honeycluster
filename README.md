@@ -111,7 +111,12 @@ Of course you can deploy whatever you want as initial access and create your own
 
 `kubectl --context=minikube apply -f initial_access/code_injection.yaml`
 
-Note: A question might be that why don't we just deploy the initial access application and nginx proxy pod in the vcluster itself. The problem was that I was unable to add the fake kube api service dns for pods inside vcluster itself. Hence we need to add it outside vcluster to trick attackers. Take precaution and lock down the namespace which has these pods deployed.
+Note: A question might be that why don't we just deploy the initial access application and nginx proxy pod in the vcluster itself. The problem was that I was unable to add the fake kube api service dns for pods inside vcluster itself. Hence we need to add it outside vcluster to trick attackers. Take precaution and lock down the namespace which has these pods deployed. 
+
+When I deploy the pod in vcluster, the hosts file of a pod looks like this. The only way I might be able to change the DNS is by changing the admission controller mutating webhook which is a feature in vluster pro version :
+
+<img width="486" height="65" alt="image" src="https://github.com/user-attachments/assets/d4dfec8b-d874-4cb4-ad54-62e5c6416ffd" />
+
 
 ## 🛠 Configuration Notes
 
