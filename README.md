@@ -170,11 +170,13 @@ All logs stored and can be queried in falco sidekick dashboard as shown below:
 
 ## 🤝 Contributing
 
-- Fork the repo
+- This project needs re-structuring which I am currently not having the time to do.
 
-- Create a feature branch
+- You can tweak Falco rules and Nginx Kube APIrules and add aditional rules which can be usueful for the community
 
-- Submit a PR with clear description and testing steps
+- Submit a PR with clear description and testing steps for the configurations, the goal is to make it a Nuclei templates type project
+
+- Feature enhancements are most welcome!
 
 
 
