@@ -174,7 +174,9 @@ All logs stored and can be queried in falco sidekick dashboard as shown below:
 
 - You can tweak Falco rules and Nginx Kube APIrules and add aditional rules which can be usueful for the community
 
-- Submit a PR with clear description and testing steps for the configurations, the goal is to make it a Nuclei templates type project
+- Submit a PR with clear description and testing steps for the configurations, the goal is to make it a Nuclei templates type project.
+
+- Would love to deviate from the Falcosidekick dashboard into another dashboard whatever suitable, suggestions are most welcome
 
 - Feature enhancements are most welcome!
 
