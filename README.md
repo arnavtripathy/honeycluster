@@ -1,6 +1,6 @@
-# Honeycluster — Kubernetes Honeypot with vcluster, Falco, and NGINX
+# KubeDecoy — Kubernetes Honeypot with vcluster, Falco, and NGINX
 
-![License](https://img.shields.io/github/license/arnavtripathy/honeycluster)
+![License](https://img.shields.io/github/license/arnavtripathy/KubeDecoy)
 ![Kubernetes](https://img.shields.io/badge/Kubernetes-1.28+-blue?logo=kubernetes)
 ![Falco](https://img.shields.io/badge/Falco-Security-orange?logo=falco)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
@@ -9,7 +9,7 @@
 
 
 
-**Honeycluster** is a lightweight, modular Kubernetes honeypot system that leverages **vcluster** for safe isolation, **Falco** for runtime threat detection, **NGINX** for simulating an exposed Kubernetes API server, and **Falcosidekick** for unified alert forwarding.  
+**KubeDecoy** is a lightweight, modular Kubernetes honeypot system that leverages **vcluster** for safe isolation, **Falco** for runtime threat detection, **NGINX** for simulating an exposed Kubernetes API server, and **Falcosidekick** for unified alert forwarding.  
 
 The system is designed to **attract**, **detect**, and **log** malicious activity in a controlled environment — enabling researchers, SOC teams, and security engineers to study attacker behavior without risking production infrastructure.
 
@@ -50,9 +50,9 @@ The system is designed to **attract**, **detect**, and **log** malicious activit
 
 ## 🏗 Architecture
 
-Below is the high-level architecture of **Honeycluster**:
+Below is the high-level architecture of **KubeDecoy**:
 
-![Honeycluster Architecture](honeyarch.png)
+![KubeDecoy Architecture](honeyarch.png)
 
 
 ## 📦 Deployment Guide
