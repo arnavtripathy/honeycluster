@@ -100,7 +100,7 @@ This folder contains configurations to setup nginx logging of vcluster KubeAPI. 
 
 `kubectl --context=minikube apply -f nginx_config/nginx-kube-api.yaml`
 
-If not, please make changes accordingly , the image used is not nginx, rather a custom image pointing to my registry, you can create a custom image, build and deploy accordingly. You can also regenerate the certificates accordingly.
+If not, please make changes accordingly , the image used is not nginx, rather a custom image pointing to my registry, you can create a custom image, build and deploy accordingly with rules you want. You can also regenerate the certificates accordingly.
 
 ### 6️⃣ Initial Access web application
 
@@ -176,7 +176,7 @@ All logs stored and can be queried in falco sidekick dashboard as shown below:
 
 - This project needs re-structuring which I am currently not having the time to do.
 
-- You can tweak Falco rules and Nginx Kube APIrules and add aditional rules which can be usueful for the community
+- You can tweak Falco rules and Nginx Kube API rules and add aditional rules which can be usueful for the community
 
 - Submit a PR with clear description and testing steps for the configurations, the goal is to make it a Nuclei templates type project.
 
