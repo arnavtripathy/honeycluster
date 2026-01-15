@@ -1,9 +1,13 @@
-# 🐝 Honeycluster — Kubernetes Honeypot with vcluster, Falco, and NGINX
+# Honeycluster — Kubernetes Honeypot with vcluster, Falco, and NGINX
 
 ![License](https://img.shields.io/github/license/arnavtripathy/honeycluster)
 ![Kubernetes](https://img.shields.io/badge/Kubernetes-1.28+-blue?logo=kubernetes)
 ![Falco](https://img.shields.io/badge/Falco-Security-orange?logo=falco)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
+
+<img width="640" height="530" alt="image" src="https://github.com/user-attachments/assets/c63690f7-ac12-4cc0-8f5e-6e56f83e1135" />
+
+
 
 **Honeycluster** is a lightweight, modular Kubernetes honeypot system that leverages **vcluster** for safe isolation, **Falco** for runtime threat detection, **NGINX** for simulating an exposed Kubernetes API server, and **Falcosidekick** for unified alert forwarding.  
 
