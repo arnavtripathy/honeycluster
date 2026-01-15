@@ -5,7 +5,8 @@
 ![Falco](https://img.shields.io/badge/Falco-Security-orange?logo=falco)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
 
-<img width="640" height="530" alt="image" src="https://github.com/user-attachments/assets/c63690f7-ac12-4cc0-8f5e-6e56f83e1135" />
+
+<img width="640" height="530" alt="image" src="https://github.com/user-attachments/assets/d937e550-c274-4add-8b97-3ef31648143c" />
 
 
 
@@ -110,7 +111,7 @@ In my architecture , I have a web application which points to the nginx in /etc/
 
 Change the IP into the nginx service cluster IP
 
-Of course you can deploy whatever you want as initial access and create your own, this is just my deployment.
+Of course you can deploy whatever you want as initial access and create your own, this is just my deployment. You can also overwrite env variables with the nginx endpoint,deploy fake tokens to trick attackers
 
 
 `kubectl --context=minikube apply -f initial_access/code_injection.yaml`
