@@ -172,6 +172,12 @@ All logs stored and can be queried in falco sidekick dashboard as shown below:
 <img width="1223" height="517" alt="Screenshot 2025-08-07 201134" src="https://github.com/user-attachments/assets/6e6a760a-958e-43bf-ba69-04a63f00f87d" />
 
 
+## 📢 Conferences 
+
+- BSides Galway 2026
+- DubSec 2026 
+
+
 
 ## 🤝 Contributing
 
